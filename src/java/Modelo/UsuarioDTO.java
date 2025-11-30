@@ -9,9 +9,6 @@ package Modelo;
  * @author flori
  */
 
-/**
- * DTO para transferir datos de Usuario (sin password)
- */
 public class UsuarioDTO {
     private String id;
     private Integer idUsuario;
@@ -25,7 +22,6 @@ public class UsuarioDTO {
     public UsuarioDTO() {
     }
 
-    // Getters y Setters
     public String getId() {
         return id;
     }

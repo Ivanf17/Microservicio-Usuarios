@@ -12,9 +12,6 @@ package Persistencia;
 import Modelo.Voluntario;
 import java.util.List;
 
-/**
- * Interface DAO para Voluntario
- */
 public interface IVoluntarioDAO {
     
     /**

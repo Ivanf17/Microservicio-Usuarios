@@ -9,10 +9,6 @@ package Modelo;
  * @author flori
  */
 
-/**
- * Clase modelo Administrador
- * Representa la entidad Administrador en la base de datos
- */
 public class Administrador {
     private String id; // Para MongoDB
     private Integer idUsuario; // Para PostgreSQL (FK a Usuario)
@@ -20,7 +16,6 @@ public class Administrador {
     private String nombre;
     private String cargo; // Cargo del administrador
 
-    // Constructor vacío
     public Administrador() {
     }
 
@@ -48,7 +43,6 @@ public class Administrador {
         this.cargo = cargo;
     }
 
-    // Getters y Setters
     public String getId() {
         return id;
     }
@@ -93,9 +87,6 @@ public class Administrador {
         this.cargo = cargo;
     }
 
-    /**
-     * Obtiene el identificador único independiente de la BD
-     */
     public String getIdentificador() {
         return id != null ? id : (idUsuario != null ? idUsuario.toString() : null);
     }

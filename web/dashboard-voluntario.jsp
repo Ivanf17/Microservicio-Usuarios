@@ -257,7 +257,7 @@
             <div class="stat-card">
                 <div class="stat-icon blue">📋</div>
                 <div class="stat-info">
-                    <h3>0</h3>
+                    <h3>${proyectosActivos}</h3>
                     <p>Proyectos Activos</p>
                 </div>
             </div>
@@ -288,32 +288,32 @@
         </div>
         
         <div class="actions">
-            <div class="action-card" onclick="location.href='#'">
+            <div class="action-card" onclick="location.href='http://localhost:8081/MS-Proyectos/ProyectoControl?accion=listar'">
                 <div class="icon">🔍</div>
                 <h3>Explorar Proyectos</h3>
                 <p>Busca proyectos que te interesen y postúlate</p>
-                <a href="#" class="btn">Explorar</a>
+                <a href="http://localhost:8081/MS-Proyectos/ProyectoControl?accion=listar" class="btn">Explorar</a>
             </div>
             
-            <div class="action-card" onclick="location.href='#'">
+            <div class="action-card" onclick="location.href='http://localhost:8082/MS-Participacion/formulario_postulacion.html'">
                 <div class="icon">📝</div>
                 <h3>Mis Postulaciones</h3>
                 <p>Revisa el estado de tus postulaciones</p>
-                <a href="#" class="btn">Ver Postulaciones</a>
+                <a href="http://localhost:8082/MS-Participacion/formulario_postulacion.html" class="btn">Ver Postulaciones</a>
             </div>
             
-            <div class="action-card" onclick="location.href='#'">
+            <div class="action-card" onclick="location.href='http://localhost:8082/MS-Participacion/formulario_participacion.html'">
                 <div class="icon">📊</div>
-                <h3>Mi Historial</h3>
-                <p>Consulta tu historial de participación</p>
-                <a href="#" class="btn">Ver Historial</a>
+                <h3>Participar</h3>
+                <p>Registra tu participación</p>
+                <a href="http://localhost:8082/MS-Participacion/formulario_participacion.html" class="btn">Ver Historial</a>
             </div>
             
-            <div class="action-card" onclick="location.href='#'">
+            <div class="action-card" onclick="location.href='http://localhost:8082/MS-Participacion/formulario_certificado.html'">
                 <div class="icon">🎓</div>
                 <h3>Mis Certificados</h3>
                 <p>Descarga tus certificados de participación</p>
-                <a href="#" class="btn">Ver Certificados</a>
+                <a href="http://localhost:8082/MS-Participacion/formulario_certificado.html" class="btn">Ver Certificados</a>
             </div>
             
             <div class="action-card" onclick="location.href='VoluntarioControl?accion=miPerfil'">

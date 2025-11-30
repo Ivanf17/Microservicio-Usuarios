@@ -16,10 +16,6 @@ import com.mongodb.MongoClientSettings;
 import com.mongodb.ServerAddress;
 import java.util.Arrays;
 
-/**
- * Conexión a MongoDB
- * Patrón Singleton
- */
 public class MongoDBConnection {
     private static MongoDBConnection instance;
     private MongoClient mongoClient;

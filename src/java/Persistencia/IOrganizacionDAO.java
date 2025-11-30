@@ -12,9 +12,6 @@ package Persistencia;
 import Modelo.Organizacion;
 import java.util.List;
 
-/**
- * Interface DAO para Organización
- */
 public interface IOrganizacionDAO {
     
     /**

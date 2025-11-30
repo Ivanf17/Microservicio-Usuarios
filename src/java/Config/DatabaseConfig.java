@@ -8,10 +8,7 @@ package Config;
  *
  * @author flori
  */
-/**
- * Configuración de base de datos
- * Patrón Singleton para configuración centralizada
- */
+
 public class DatabaseConfig {
     private static DatabaseConfig instance;
     private String tipoBaseDatos; // "POSTGRESQL" o "MONGODB"
@@ -28,7 +25,7 @@ public class DatabaseConfig {
     
     private DatabaseConfig() {
         // Por defecto usamos PostgreSQL
-        this.tipoBaseDatos = "MONGODB";
+        this.tipoBaseDatos = "POSTGRESQL";
         // Puedes cambiar a MongoDB: this.tipoBaseDatos = "MONGODB";
     }
     
@@ -52,7 +49,7 @@ public class DatabaseConfig {
         }
     }
     
-    // Getters PostgreSQL
+    
     public String getPostgresUrl() {
         return POSTGRES_URL;
     }
@@ -65,7 +62,7 @@ public class DatabaseConfig {
         return POSTGRES_PASSWORD;
     }
     
-    // Getters MongoDB
+    
     public String getMongoHost() {
         return MONGO_HOST;
     }
@@ -78,9 +75,7 @@ public class DatabaseConfig {
         return MONGO_DATABASE;
     }
     
-    /**
-     * Método para cambiar la BD desde código o servlet
-     */
+   
     public void cambiarBaseDatos(String nuevaBD) {
         setTipoBaseDatos(nuevaBD);
     }

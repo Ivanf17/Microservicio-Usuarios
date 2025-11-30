@@ -11,10 +11,6 @@ package Modelo;
 
 import java.time.LocalDate;
 
-/**
- * Clase modelo Voluntario
- * Representa la entidad Voluntario en la base de datos
- */
 public class Voluntario {
     private String id; // Para MongoDB
     private Integer idUsuario; // Para PostgreSQL (FK a Usuario)
@@ -25,7 +21,6 @@ public class Voluntario {
     private String direccion;
     private String telefono;
 
-    // Constructor vacío
     public Voluntario() {
     }
 
@@ -65,7 +60,6 @@ public class Voluntario {
         this.telefono = telefono;
     }
 
-    // Getters y Setters
     public String getId() {
         return id;
     }
@@ -138,9 +132,6 @@ public class Voluntario {
         return nombre + " " + apellido;
     }
 
-    /**
-     * Obtiene el identificador único independiente de la BD
-     */
     public String getIdentificador() {
         return id != null ? id : (idUsuario != null ? idUsuario.toString() : null);
     }

@@ -9,9 +9,6 @@ package Modelo;
  * @author flori
  */
 
-/**
- * DTO para transferir datos de Organización
- */
 public class OrganizacionDTO {
     private String id;
     private Integer idUsuario;
@@ -31,7 +28,7 @@ public class OrganizacionDTO {
     public OrganizacionDTO() {
     }
 
-    // Getters y Setters
+
     public String getId() {
         return id;
     }
@@ -128,9 +125,6 @@ public class OrganizacionDTO {
         this.estado = estado;
     }
 
-    /**
-     * Verifica si la organización está aprobada
-     */
     public boolean estaAprobada() {
         return "Aprobado".equals(estadoValidacion);
     }

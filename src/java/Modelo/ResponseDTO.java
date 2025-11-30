@@ -9,9 +9,6 @@ package Modelo;
  * @author flori
  */
 
-/**
- * DTO para respuestas genéricas de la API
- */
 public class ResponseDTO {
     private boolean success;
     private String message;
@@ -32,7 +29,6 @@ public class ResponseDTO {
         this.data = data;
     }
 
-    // Métodos estáticos para facilitar creación
     public static ResponseDTO success(String message) {
         return new ResponseDTO(true, message);
     }
@@ -53,7 +49,6 @@ public class ResponseDTO {
         return response;
     }
 
-    // Getters y Setters
     public boolean isSuccess() {
         return success;
     }

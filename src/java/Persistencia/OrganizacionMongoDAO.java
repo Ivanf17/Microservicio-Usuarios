@@ -19,9 +19,6 @@ import org.bson.Document;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Implementación MongoDB del DAO de Organización
- */
 public class OrganizacionMongoDAO implements IOrganizacionDAO {
     
     private MongoCollection<Document> collection;

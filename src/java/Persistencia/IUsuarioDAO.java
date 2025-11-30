@@ -13,10 +13,6 @@ import Modelo.Usuario;
 import java.time.LocalDateTime;
 import java.util.List;
 
-/**
- * Interface DAO para Usuario
- * Define las operaciones CRUD y métodos específicos
- */
 public interface IUsuarioDAO {
     
     /**

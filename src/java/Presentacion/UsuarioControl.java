@@ -17,8 +17,12 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.io.BufferedReader;
 
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.List;
 
 @WebServlet(name = "UsuarioControl", urlPatterns = {"/UsuarioControl"})
@@ -35,7 +39,6 @@ public class UsuarioControl extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        // Verificar sesión y rol de administrador
         if (!verificarAccesoAdmin(request, response)) {
             return;
         }
@@ -114,7 +117,10 @@ public class UsuarioControl extends HttpServlet {
             request.setAttribute("totalVoluntarios", voluntarios);
             request.setAttribute("totalOrganizaciones", organizaciones);
             request.setAttribute("totalAdministradores", administradores);
-            
+            int proyectosActivos = obtenerProyectosActivos();
+            System.out.println("PROYECTOS ACTIVOS: " + proyectosActivos);
+            request.setAttribute("proyectosActivos", proyectosActivos);
+
             request.getRequestDispatcher("admin/listar-usuarios.jsp").forward(request, response);
             
         } catch (Exception e) {
@@ -176,16 +182,13 @@ public class UsuarioControl extends HttpServlet {
             String rol = request.getParameter("rol");
             String estado = request.getParameter("estado");
             
-            // Buscar usuario existente
             Usuario usuario = usuarioServicio.buscarPorId(id);
             
-            // Actualizar campos
             usuario.setUsername(username);
             usuario.setEmail(email);
             usuario.setRol(rol);
             usuario.setEstado(estado);
             
-            // Solo actualizar password si se proporciona uno nuevo
             if (password != null && !password.trim().isEmpty()) {
                 usuario.setPassword(password);
             }
@@ -235,7 +238,6 @@ public class UsuarioControl extends HttpServlet {
                 throw new IllegalArgumentException("ID de usuario requerido");
             }
             
-            // Verificar que no se está eliminando a sí mismo
             HttpSession session = request.getSession(false);
             String idUsuarioActual = (String) session.getAttribute("idUsuario");
             
@@ -253,4 +255,27 @@ public class UsuarioControl extends HttpServlet {
             listarUsuarios(request, response);
         }
     }
+    
+        private int obtenerProyectosActivos() {
+        try {
+            URL url = new URL("http://localhost:8081/ProyectoMS/ProyectoControl");
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+
+            con.setRequestMethod("POST");
+            con.setDoOutput(true);
+
+            String data = "accion=contarActivos";
+            con.getOutputStream().write(data.getBytes());
+
+            BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            String resp = br.readLine();
+            br.close();
+
+            return Integer.parseInt(resp);
+
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
 }

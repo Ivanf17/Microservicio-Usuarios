@@ -9,10 +9,6 @@ package Modelo;
  * @author flori
  */
 
-/**
- * Clase modelo Organización
- * Representa la entidad Organización en la base de datos
- */
 public class Organizacion {
     private String id; // Para MongoDB
     private Integer idUsuario; // Para PostgreSQL (FK a Usuario)
@@ -25,7 +21,6 @@ public class Organizacion {
     private String representante; // Representante legal
     private String estadoValidacion; // Pendiente, Aprobado, Rechazado
 
-    // Constructor vacío
     public Organizacion() {
         this.estadoValidacion = "Pendiente";
     }
@@ -74,7 +69,6 @@ public class Organizacion {
         this.estadoValidacion = estadoValidacion;
     }
 
-    // Getters y Setters
     public String getId() {
         return id;
     }
@@ -159,16 +153,10 @@ public class Organizacion {
         this.estadoValidacion = estadoValidacion;
     }
 
-    /**
-     * Obtiene el identificador único independiente de la BD
-     */
     public String getIdentificador() {
         return id != null ? id : (idUsuario != null ? idUsuario.toString() : null);
     }
 
-    /**
-     * Verifica si la organización está aprobada
-     */
     public boolean estaAprobada() {
         return "Aprobado".equals(estadoValidacion);
     }

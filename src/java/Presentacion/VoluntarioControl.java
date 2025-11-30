@@ -18,8 +18,12 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.io.BufferedReader;
 
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -76,6 +80,9 @@ public class VoluntarioControl extends HttpServlet {
                 case "miPerfil":
                     verMiPerfil(request, response);
                     break;
+                case "dashboard":
+                    mostrarDashboardVoluntario(request, response);
+                break;
                 default:
                     response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Acción no válida");
             }
@@ -218,6 +225,9 @@ public class VoluntarioControl extends HttpServlet {
             
         } catch (Exception e) {
             request.setAttribute("error", e.getMessage());
+            String proyectosActivos = contarProyectosActivos();
+            request.setAttribute("proyectosActivos", proyectosActivos);
+
             request.getRequestDispatcher("dashboard-voluntario.jsp").forward(request, response);
         }
     }
@@ -322,4 +332,36 @@ public class VoluntarioControl extends HttpServlet {
             listarVoluntarios(request, response);
         }
     }
+    
+    private void mostrarDashboardVoluntario(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+
+    String proyectosActivos = contarProyectosActivos();
+    request.setAttribute("proyectosActivos", proyectosActivos);
+
+    request.getRequestDispatcher("dashboard-voluntario.jsp").forward(request, response);
+}
+
+    
+    private String contarProyectosActivos() {
+    try {
+        URL url = new URL("http://localhost:8081/MS-Proyectos/ProyectoControl");
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        con.setRequestMethod("POST");
+        con.setDoOutput(true);
+
+        String parametros = "accion=contarActivos";
+        con.getOutputStream().write(parametros.getBytes("UTF-8"));
+
+        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+        String respuesta = in.readLine();
+        in.close();
+
+        return respuesta; 
+    } catch (Exception e) {
+        e.printStackTrace();
+        return "0";
+    }
+}
+
 }

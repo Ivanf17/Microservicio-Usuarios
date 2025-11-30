@@ -12,8 +12,12 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.io.BufferedReader;
 
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.List;
 
 @WebServlet(name = "OrganizacionControl", urlPatterns = {"/OrganizacionControl"})
@@ -96,13 +100,11 @@ public class OrganizacionControl extends HttpServlet {
         try {
             System.out.println("=== REGISTRO DE ORGANIZACIÓN ===");
             
-            // Datos del usuario
             String username = request.getParameter("username");
             String email = request.getParameter("email");
             String password = request.getParameter("password");
             String confirmarPassword = request.getParameter("confirmarPassword");
             
-            // Datos de la organización
             String nombre = request.getParameter("nombre");
             String nit = request.getParameter("nit");
             String representante = request.getParameter("representante");
@@ -114,12 +116,10 @@ public class OrganizacionControl extends HttpServlet {
             System.out.println("Organización: " + nombre);
             System.out.println("NIT: " + nit);
             
-            // Validar contraseñas
             if (!password.equals(confirmarPassword)) {
                 throw new IllegalArgumentException("Las contraseñas no coinciden");
             }
             
-            // Crear organización
             Organizacion organizacion = new Organizacion(
                 username, email, password,
                 nombre, direccion, telefono,
@@ -197,7 +197,7 @@ public class OrganizacionControl extends HttpServlet {
             request.setAttribute("organizaciones", pendientes);
             request.setAttribute("totalPendientes", pendientes.size());
             
-            request.getRequestDispatcher("admin/validar-organizaciones.jsp").forward(request, response);
+            request.getRequestDispatcher("validar-organizaciones.jsp").forward(request, response);
             
         } catch (Exception e) {
             request.setAttribute("error", "Error al cargar organizaciones: " + e.getMessage());
@@ -274,7 +274,33 @@ public class OrganizacionControl extends HttpServlet {
             Organizacion organizacion = organizacionServicio.buscarPorIdUsuario(idUsuario);
             
             request.setAttribute("organizacion", organizacion);
-            request.getRequestDispatcher("organizacion/mi-perfil.jsp").forward(request, response);
+            // === CONSULTAR PROYECTOS PUBLICADOS DESDE EL OTRO MICROSERVICIO ===
+            int proyectosPublicados = 0;
+
+            try {
+                Integer idOrg = organizacion.getIdUsuario();
+
+                URL url = new URL("http://localhost:8081/MS-Proyectos/ProyectoControl");
+                HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                con.setRequestMethod("POST");
+                con.setDoOutput(true);
+
+                String parametros = "accion=contarPublicados&idOrg=" + idOrg;
+                con.getOutputStream().write(parametros.getBytes());
+
+
+                BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+                proyectosPublicados = Integer.parseInt(br.readLine());
+                br.close();
+
+            } catch (Exception e) {
+                proyectosPublicados = 0;
+                e.printStackTrace();
+            }
+
+            request.setAttribute("proyectosPublicados", proyectosPublicados);
+
+            request.getRequestDispatcher("dashboard-organizacion.jsp").forward(request, response);
             
         } catch (Exception e) {
             request.setAttribute("error", e.getMessage());

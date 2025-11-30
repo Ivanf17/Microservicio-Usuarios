@@ -11,15 +11,8 @@ package Persistencia;
 
 import Config.DatabaseConfig;
 
-/**
- * Factory Pattern para crear instancias de DAOs
- * Permite cambiar entre PostgreSQL y MongoDB dinámicamente
- */
 public class DAOFactory {
     
-    /**
-     * Obtiene la implementación de IUsuarioDAO según la BD configurada
-     */
     public static IUsuarioDAO getUsuarioDAO() {
         DatabaseConfig config = DatabaseConfig.getInstance();
         String tipoBD = config.getTipoBaseDatos();
@@ -33,10 +26,7 @@ public class DAOFactory {
                 throw new IllegalStateException("Tipo de base de datos no soportado: " + tipoBD);
         }
     }
-    
-    /**
-     * Obtiene la implementación de IVoluntarioDAO según la BD configurada
-     */
+
     public static IVoluntarioDAO getVoluntarioDAO() {
         DatabaseConfig config = DatabaseConfig.getInstance();
         String tipoBD = config.getTipoBaseDatos();
@@ -50,10 +40,7 @@ public class DAOFactory {
                 throw new IllegalStateException("Tipo de base de datos no soportado: " + tipoBD);
         }
     }
-    
-    /**
-     * Obtiene la implementación de IOrganizacionDAO según la BD configurada
-     */
+
     public static IOrganizacionDAO getOrganizacionDAO() {
         DatabaseConfig config = DatabaseConfig.getInstance();
         String tipoBD = config.getTipoBaseDatos();
@@ -67,20 +54,13 @@ public class DAOFactory {
                 throw new IllegalStateException("Tipo de base de datos no soportado: " + tipoBD);
         }
     }
-    
-    /**
-     * Cambia el tipo de base de datos en tiempo de ejecución
-     * @param tipoBD "POSTGRESQL" o "MONGODB"
-     */
+
     public static void cambiarBaseDatos(String tipoBD) {
         DatabaseConfig config = DatabaseConfig.getInstance();
         config.setTipoBaseDatos(tipoBD);
         System.out.println("✓ Base de datos cambiada a: " + tipoBD);
     }
-    
-    /**
-     * Obtiene el tipo de BD actual
-     */
+
     public static String getTipoBaseDatosActual() {
         return DatabaseConfig.getInstance().getTipoBaseDatos();
     }

@@ -9,9 +9,6 @@ package Modelo;
  * @author flori
  */
 
-/**
- * DTO para transferir datos de Voluntario
- */
 public class VoluntarioDTO {
     private String id;
     private Integer idUsuario;
@@ -29,7 +26,6 @@ public class VoluntarioDTO {
     public VoluntarioDTO() {
     }
 
-    // Getters y Setters
     public String getId() {
         return id;
     }

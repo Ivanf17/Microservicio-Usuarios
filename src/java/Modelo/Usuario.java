@@ -10,10 +10,6 @@ package Modelo;
  */
 import java.time.LocalDateTime;
 
-/**
- * Clase modelo Usuario
- * Representa la entidad Usuario en la base de datos
- */
 public class Usuario {
     private String id; // ObjectId para MongoDB, String para compatibilidad
     private Integer idUsuario; // id_usuario para PostgreSQL
@@ -27,7 +23,6 @@ public class Usuario {
     private LocalDateTime fechaCreacion;
     private LocalDateTime ultimaConexion;
 
-    // Constructor vacío
     public Usuario() {
         this.fechaCreacion = LocalDateTime.now();
         this.estado = "Activo";
@@ -56,7 +51,6 @@ public class Usuario {
         this.fechaCreacion = LocalDateTime.now();
     }
 
-    // Getters y Setters
     public String getId() {
         return id;
     }
@@ -145,9 +139,6 @@ public class Usuario {
         this.ultimaConexion = ultimaConexion;
     }
 
-    /**
-     * Obtiene el identificador único independiente de la BD
-     */
     public String getIdentificador() {
         return id != null ? id : (idUsuario != null ? idUsuario.toString() : null);
     }

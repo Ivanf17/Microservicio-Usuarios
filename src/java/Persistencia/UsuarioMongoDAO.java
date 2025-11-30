@@ -24,9 +24,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Implementación MongoDB del DAO de Usuario
- */
 public class UsuarioMongoDAO implements IUsuarioDAO {
     
     private MongoCollection<Document> collection;

@@ -220,9 +220,9 @@ public class AuthControl extends HttpServlet {
     private String getDashboardPorRol(String rol) {
         switch (rol) {
             case "Voluntario":
-                return "dashboard-voluntario.jsp";
+                return "VoluntarioControl?accion=dashboard";
             case "Organizacion":
-                return "dashboard-organizacion.jsp";
+                return "OrganizacionControl?accion=miPerfil";
             case "Administrador":
                 return "dashboard-admin.jsp";
             default:

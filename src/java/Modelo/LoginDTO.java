@@ -9,9 +9,6 @@ package Modelo;
  * @author flori
  */
 
-/**
- * DTO para login de usuarios
- */
 public class LoginDTO {
     private String username;
     private String password;

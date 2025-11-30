@@ -257,7 +257,7 @@
     <nav class="navbar">
         <div class="navbar-brand">🏢 SGVC</div>
         <div class="navbar-menu">
-            <a href="dashboard-organizacion.jsp">Inicio</a>
+            <a href="OrganizacionControl?accion=miPerfil">Inicio</a>
             <a href="OrganizacionControl?accion=miPerfil">Mi Perfil</a>
             <div class="user-info">
                 <div class="user-avatar"><%= username.substring(0, 1).toUpperCase() %></div>
@@ -292,7 +292,7 @@
             <div class="stat-card">
                 <div class="stat-icon green">📋</div>
                 <div class="stat-info">
-                    <h3>0</h3>
+                    <h3>${proyectosPublicados}</h3>
                     <p>Proyectos Publicados</p>
                 </div>
             </div>
@@ -315,11 +315,11 @@
         </div>
         
         <div class="actions <%= "Pendiente".equals(estado) ? "disabled-overlay" : "" %>">
-            <div class="action-card" onclick="<%= "Pendiente".equals(estado) ? "" : "location.href='#'" %>">
+            <div class="action-card" onclick="<%= "Pendiente".equals(estado) ? "" : "location.href='http://localhost:8081/MS-Proyectos/crear-proyecto.jsp'" %>">
                 <div class="icon">➕</div>
                 <h3>Publicar Proyecto</h3>
                 <p>Crea un nuevo proyecto de voluntariado</p>
-                <a href="#" class="btn">Publicar</a>
+                <a href="http://localhost:8081/MS-Proyectos/crear-proyecto.jsp?idUsuario=${usuario.id}" class="btn">Publicar</a>
             </div>
             
             <div class="action-card" onclick="<%= "Pendiente".equals(estado) ? "" : "location.href='#'" %>">

@@ -12,10 +12,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-/**
- * Conexión a PostgreSQL
- * Patrón Singleton
- */
 public class PostgreSQLConnection {
     private static PostgreSQLConnection instance;
     private Connection connection;
@@ -58,11 +54,6 @@ public class PostgreSQLConnection {
         }
     }
     
-    /**
-     * Obtiene una nueva conexión (no singleton)
-     * @return 
-     * @throws java.sql.SQLException
-     */
     public static Connection getNewConnection() throws SQLException {
         DatabaseConfig config = DatabaseConfig.getInstance();
         try {
